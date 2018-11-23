@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/register', 'SessionsController@index');
+Route::post('/register', 'SessionsController@store');
+
+Route::get('/login', 'SessionsController@login');
+Route::post('/login', 'SessionsController@login_store');
+Route::get('logout', 'SessionsController@destroy');
