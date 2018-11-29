@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66ca7343889332c2b8ecca11c251430c",
+    "content-hash": "5fd5b8dd3b9df01165759b49937b16e0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1337,6 +1337,39 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sayeed/custom-migrate",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nilpahar/custom-migration.git",
+                "reference": "50fc063d3d5fd54b2ba33407f30d11b0213eb609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nilpahar/custom-migration/zipball/50fc063d3d5fd54b2ba33407f30d11b0213eb609",
+                "reference": "50fc063d3d5fd54b2ba33407f30d11b0213eb609",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sayeed\\CustomMigrate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hasan",
+                    "email": "jbhasan@gmail.com"
+                }
+            ],
+            "description": "Custom migrate in laravel. With indifidual file migrate.",
+            "time": "2018-11-08T12:59:37+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

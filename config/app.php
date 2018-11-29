@@ -163,7 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Sayeed\CustomMigrate\CustomMigrateServiceProvider::class,
         /*
          * Application Service Providers...
          */

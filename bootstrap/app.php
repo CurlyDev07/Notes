@@ -41,6 +41,7 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->register(Sayeed\CustomMigrate\CustomMigrateServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

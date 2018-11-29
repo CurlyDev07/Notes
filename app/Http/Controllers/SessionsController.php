@@ -29,7 +29,7 @@ class SessionsController extends Controller
 
         auth()->login($user);
             
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function login(){
@@ -40,8 +40,9 @@ class SessionsController extends Controller
 
         //  Attempt to authenticate.
         if (! auth()->attempt(request(['email', 'password']))) {
-            return dd('tae');
+            return back();
         } // if not redirect back 
+        
         // if so, sign them in
         // Redirect to hompage
         return redirect('/');
