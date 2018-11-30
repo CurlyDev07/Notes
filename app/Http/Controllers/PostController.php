@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index(){
 		$post = Post::latest()->get();
 
-		$tae = Category::selectRaw('year(created_at) year, monthname(created_at) month, count(*) count')->groupBy('year','month')->get()->toArray();
+	
 
         return view('post.index', compact('post','tae'));
      }
