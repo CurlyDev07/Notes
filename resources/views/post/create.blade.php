@@ -35,17 +35,17 @@
                         <textarea name="body" id="editor" class="form-control"></textarea>
                     </div><!-- body -->
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit"  id="tae" class="btn btn-primary">Submit</button>
+                    <input type="button"  value="sadsd">
                 </form><!-- FORM -->
-{{-- 
+
                 <form action="/upload" method="POST" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
                     {{ csrf_field() }}
-                </form> --}}
+                </form>
 
             </div><!-- card-body-->
         </div><!-- card-->
     </div><!-- col-md-8 -->
-
 
 @endsection
 
@@ -53,22 +53,27 @@
 
     <script>
 
-        // Dropzone.options.myAwesomeDropzone = {// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-        //     paramName: "file", // The name that will be used to transfer the file
-        //     maxFilesize: 1, // MB
-        //     maxFiles: 1,
-        //     addRemoveLinks: true,
-        //     dictRemoveFileConfirmation: 'Are you sure to remove this file?',
-        //     success: function(file){
-        //         this.on("removedfile", function(file) {
-        //             $.ajax({
-        //                 method: "GET",
-        //                 url: '{{ URL::to('/destroy_image') }}',
-        //                 data: {file_name:  finished.name}
-        //             })
-        //         });
-        //     }
-        // };
+        Dropzone.options.myAwesomeDropzone = {// "myAwesomeDropzone" is the camelized version of the HTML element's ID
+    
+
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: 1, // MB
+            // maxFiles: 1,
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            dictRemoveFileConfirmation: 'Are you sure to remove this file?',
+            success: function(file){
+
+                this.on("removedfile", function(file) {
+                    $.ajax({
+                        method: "GET",
+                        url: '{{ URL::to('/destroy_image') }}',
+                        data: {file_name:  file.name},
+                    })
+                });
+            },
+        };
+    
 
   </script>
 

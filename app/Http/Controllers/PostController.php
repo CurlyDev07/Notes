@@ -39,21 +39,24 @@ class PostController extends Controller
 	public function upload(){
 		$file = request()->file('file');
 
+		// if ($file) {
+			// 	$file_name = date("m-d-y-H-i-s").'.'.$file->getClientOriginalExtension();
+			// 	$file->move('images', $file_name); // the file move to public/images/filename
+		// }
 		if ($file) {
-			$file_name = date("m-d-y-H-i-s").'.'.$file->getClientOriginalExtension();
-			$file->move('images', $file_name); // the file move to public/images/filename
+			$file_name = $file->getClientOriginalName();
+			$file->move('images',$file_name);
+			return $file_name;
 		}
-		
-		return redirect('/destroy_image');
+	
 	}
 
 	public function destroy_image(){
 
-		// // delete('image/'.request()->file_name);
-		// $delete_file = File::delete(public_path().'/images/'.$file_name);
+		$file_name = request()->file_name;
 
-		// if ($delete_file) {
-		// 	return 'deleted';
-		// }
+		\File::delete(public_path('images/'. $file_name));
+
+		return 'tae';
 	}
 }
