@@ -31,3 +31,4 @@ Route::post('upload', 'PostController@upload');
 
 Route::get('/destroy_image', 'PostController@destroy_image');
 
+Route::get('/get_img_names', 'PostController@get_uploaded_img_name');

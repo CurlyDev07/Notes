@@ -29,14 +29,17 @@
                             </select>
                         </div>
                     </div>
+
+                    <div id="tae"></div>
                     
+                    {{-- <input type="text" id="hidden" value=""> --}}
+
                     <div class="form-group">
                         <label for="body"></label>
                         <textarea name="body" id="editor" class="form-control"></textarea>
                     </div><!-- body -->
 
                     <button type="submit"  id="tae" class="btn btn-primary">Submit</button>
-                    <input type="button"  value="sadsd">
                 </form><!-- FORM -->
 
                 <form action="/upload" method="POST" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
@@ -47,6 +50,7 @@
         </div><!-- card-->
     </div><!-- col-md-8 -->
 
+    {{-- {{ dd(App\Image::img()) }} --}}
 @endsection
 
 @section('script')
@@ -54,15 +58,20 @@
     <script>
 
         Dropzone.options.myAwesomeDropzone = {// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-    
-
             paramName: "file", // The name that will be used to transfer the file
             maxFilesize: 1, // MB
             // maxFiles: 1,
             addRemoveLinks: true,
-            autoProcessQueue: false,
             dictRemoveFileConfirmation: 'Are you sure to remove this file?',
             success: function(file){
+                $.ajax({
+                    method: "GET",
+                    url: '{{ URL::to('/get_img_names') }}',
+                    success: function(file){
+                       var tae = $('#tae').html('<input type="text" name="image" value="'+file+'">');
+                        console.log(tae);
+                    } 
+                })
 
                 this.on("removedfile", function(file) {
                     $.ajax({
@@ -73,7 +82,6 @@
                 });
             },
         };
-    
 
   </script>
 

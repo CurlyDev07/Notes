@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Post;
 class Post extends Model
 {
-    protected $fillable = ['title', 'body', 'category'];
+    protected $fillable = ['title', 'body', 'category', 'image'];
 
     public static function filter(){
         $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
@@ -17,7 +17,9 @@ class Post extends Model
         return $archives;
     }
 
-
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
