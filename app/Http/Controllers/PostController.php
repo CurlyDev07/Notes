@@ -8,52 +8,74 @@ use App\Post;
 use App\User;
 use File;
 use App\Category;
-
+use App\Image;
 class PostController extends Controller
 {
     public function index(){
 		$post = Post::latest()->get();
 
-	
 
         return view('post.index', compact('post','tae'));
      }
 
-	public function create(){
+	 public function create(){
 		$category = Category::all();
 		return view('post.create', compact('category'));
 	}
 
 	public function store(){
-		auth()->user()->posts()->create(request(['title', 'body', 'category']));
-		
+
+		auth()->user()->posts()->create(request(['title', 'body', 'category', 'image']));
+		Image::truncate();
+
+		// dd(explode(',', request()->image));
+
+		// auth()->user()->posts()->create([
+		// 	'title' => request()->title,
+		// 	'body' => request()->body,
+		// 	'category' => request()->category,
+		// 	'image' => request()->image,
+		// ]);
+
 		return redirect('/');
 	}
 
 	public function show($id){
+		
 		$post = Post::find($id);
 
 		return view('post.show', compact('post'));
 	}
 
+
 	public function upload(){
 		$file = request()->file('file');
-
+	
 		if ($file) {
-			$file_name = date("m-d-y-H-i-s").'.'.$file->getClientOriginalExtension();
-			$file->move('images', $file_name); // the file move to public/images/filename
+			$file_name = $file->getClientOriginalName();
+
+			$file->move('images',$file_name);
+
+			$image = new Image;
+			$image->name = $file_name;
+			$image->save();
+
+			return $file_name;
 		}
-		
-		return redirect('/destroy_image');
 	}
 
 	public function destroy_image(){
 
-		// // delete('image/'.request()->file_name);
-		// $delete_file = File::delete(public_path().'/images/'.$file_name);
+		$file_name = request()->file_name;
 
-		// if ($delete_file) {
-		// 	return 'deleted';
-		// }
+		\File::delete(public_path('images/'. $file_name));
+
+		return 'tae';
+	}
+
+	public function get_uploaded_img_name(){
+		$name = Image::img();
+
+		return $name;
 	}
 }

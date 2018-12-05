@@ -20,13 +20,17 @@
 
         <hr>
 
-        <!-- Preview Image -->
-        {{-- <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+		<!-- Preview Image -->
+		
+		@foreach (explode(',', $post->image) as $explode)
+			<img class="img-fluid rounded" src="{{ asset('images/'.$explode) }}" alt="">
+		@endforeach
+        {{-- <img class="img-fluid rounded" src="{{ asset('images/'.trim($post->image, ',')) }}" alt=""> --}}
 
-        <hr> --}}
+        <hr>
 
         <!-- Post Content -->
-        <p class="lead">{{ $post->body }}</p>
+        <p class="lead">{!! $post->body !!}</p>
 
         <blockquote class="blockquote">
           <footer class="blockquote-footer">Someone famous in
