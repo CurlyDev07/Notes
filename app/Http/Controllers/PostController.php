@@ -9,11 +9,24 @@ use App\User;
 use File;
 use App\Category;
 use App\Image;
+use App\TempImg;
+use Storage;
+use Carbon\Carbon;
 class PostController extends Controller
 {
-    public function index(){
-		$post = Post::latest()->get();
 
+    public function index(){
+		$post = Post::latest();
+			if ($month = request()->month) {
+				$post->whereMonth('created_at', Carbon::parse($month)->month);
+			}
+			if ($year = request()->year) {
+				$post->whereYear('created_at', $year);
+			}
+			if ($category = request()->category) {
+				$post->where('category', $category);
+			}
+		$post = $post->get();
 
         return view('post.index', compact('post','tae'));
      }
@@ -24,9 +37,8 @@ class PostController extends Controller
 	}
 
 	public function store(){
-
 		auth()->user()->posts()->create(request(['title', 'body', 'category', 'image']));
-		Image::truncate();
+		TempImg::truncate();
 
 		// dd(explode(',', request()->image));
 
@@ -56,7 +68,7 @@ class PostController extends Controller
 
 			$file->move('images',$file_name);
 
-			$image = new Image;
+			$image = new TempImg;
 			$image->name = $file_name;
 			$image->save();
 
@@ -67,14 +79,14 @@ class PostController extends Controller
 	public function destroy_image(){
 
 		$file_name = request()->file_name;
-
+		$delete = TempImg::where('name', $file_name)->delete();
 		\File::delete(public_path('images/'. $file_name));
 
 		return 'tae';
 	}
 
 	public function get_uploaded_img_name(){
-		$name = Image::img();
+		$name = TempImg::img();
 
 		return $name;
 	}

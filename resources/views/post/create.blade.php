@@ -49,8 +49,6 @@
             </div><!-- card-body-->
         </div><!-- card-->
     </div><!-- col-md-8 -->
-
-    {{-- {{ dd(App\Image::img()) }} --}}
 @endsection
 
 @section('script')
@@ -63,6 +61,12 @@
             // maxFiles: 1,
             addRemoveLinks: true,
             dictRemoveFileConfirmation: 'Are you sure to remove this file?',
+            
+            renameFile: function (file) {
+                name = new Date().getTime() + Math.floor((Math.random() * 100) + 1) + '_' + file.name;
+                return name;
+            },
+
             success: function(file){
                 $.ajax({
                     method: "GET",
@@ -72,14 +76,6 @@
                         console.log(tae);
                     } 
                 })
-
-                this.on("removedfile", function(file) {
-                    $.ajax({
-                        method: "GET",
-                        url: '{{ URL::to('/destroy_image') }}',
-                        data: {file_name:  file.name},
-                    })
-                });
             },
         };
 

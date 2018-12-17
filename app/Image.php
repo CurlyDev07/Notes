@@ -12,13 +12,5 @@ class Image extends Model
         return $this->belongsTo(Post::class);
     }
    
-    public static function img(){
-        $img = Image::all();
-        $names = '';
-        foreach ($img as $key => $value) {
-            $names .= $value->name.',';
-        }
-        
-		return $names;
-    }
+  
 }

@@ -18,7 +18,6 @@ Route::get('/post/create', 'PostController@create');
 Route::post('/post/store', 'PostController@store');
 Route::get('/post/show/{id}', 'PostController@show');
 
-
 Route::get('/register', 'SessionsController@index');
 Route::post('/register', 'SessionsController@store');
 

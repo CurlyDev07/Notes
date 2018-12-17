@@ -21,29 +21,20 @@
             <div class="row">
                 <div class="col-lg-">
                     <ul class="list-unstyled mb-0">
-
-                        @foreach ($categories = App\Category::categories(); as $category)
+                        @foreach ($filter_cat = App\Category::filter_cat() as $filter_cat)
                             <li>
-                                <a href="/?id={{ $category->name }}">{{ $category->name }}</a>
+                                <a href="/?category={{ $filter_cat->id }}">{{ $filter_cat->name }}</a>
                             </li>
                         @endforeach
-
-                        <li>
-                            <a href="#">Web Design</a>
-                        </li>
-                        <li>
-                            <a href="#">HTML</a>
-                        </li>
-                        <li>
-                            <a href="#">Freebies</a>
-                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-unstyled mb-0">
                         @foreach ($filter_dates = App\Post::filter(); as $filter_date)
                             <li>
-                                <a href="#">{{ $filter_date->month }}</a>
+                                <a href="/?month={{ $filter_date->month }}&year={{ $filter_date->year }}">
+                                    {{ $filter_date->month }}
+                                </a>
                             </li>
                         @endforeach
                     </ul>
