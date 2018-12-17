@@ -22,7 +22,7 @@
 					</a>
 					
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">My Post</a>
+						<a class="dropdown-item" href="/user/post">My Post</a>
 						<a class="dropdown-item" href="/logout">Logout</a>
 					</div>
 				</div>

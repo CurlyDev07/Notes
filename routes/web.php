@@ -18,7 +18,6 @@ Route::get('/post/create', 'PostController@create');
 Route::post('/post/store', 'PostController@store');
 Route::get('/post/show/{id}', 'PostController@show');
 
-
 Route::get('/register', 'SessionsController@index');
 Route::post('/register', 'SessionsController@store');
 
@@ -32,3 +31,8 @@ Route::post('upload', 'PostController@upload');
 Route::get('/destroy_image', 'PostController@destroy_image');
 
 Route::get('/get_img_names', 'PostController@get_uploaded_img_name');
+
+Route::get('/user/post', 'ProfileCon@post');
+Route::get('/user/delete/{id}', 'ProfileCon@delete');
+Route::get('/user/update/{id}', 'ProfileCon@update');
+Route::post('/user/store/{id}', 'ProfileCon@store');
