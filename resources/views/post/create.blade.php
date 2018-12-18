@@ -31,7 +31,6 @@
                     </div>
 
                     <div id="tae"></div>
-                    
                     {{-- <input type="text" id="hidden" value=""> --}}
 
                     <div class="form-group">
@@ -68,6 +67,18 @@
             },
 
             success: function(file){
+                this.on("removedfile", function (file) {
+                    // alert(file.upload.filename); // get the renamed uploaded file
+                    $.ajax({
+                        method: "GET",
+                        url: '{{ URL::to('/destroy_image') }}',
+                        data: {file_name: file.upload.filename},
+                        success: function(file){
+                            alert(file);
+                        }
+                    });
+                });
+
                 $.ajax({
                     method: "GET",
                     url: '{{ URL::to('/get_img_names') }}',
@@ -78,17 +89,16 @@
                 })
             },
         };
-
   </script>
 
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            console.log( editor );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

@@ -77,17 +77,15 @@ class PostController extends Controller
 	}
 
 	public function destroy_image(){
-
 		$file_name = request()->file_name;
+		$new = $file_name;
 		$delete = TempImg::where('name', $file_name)->delete();
 		\File::delete(public_path('images/'. $file_name));
-
-		return 'tae';
+		return $new;
 	}
 
 	public function get_uploaded_img_name(){
 		$name = TempImg::img();
-
 		return $name;
 	}
 }
